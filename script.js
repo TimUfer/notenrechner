@@ -74,6 +74,10 @@ function downloadJSON() {
   URL.revokeObjectURL(url);
 }
 
+function triggerUpload() {
+  document.getElementById('uploadInput').click();
+}
+
 function uploadJSON(input) {
   const file = input.files[0];
   if (!file) return;
@@ -99,3 +103,26 @@ function uploadJSON(input) {
   reader.readAsText(file);
   input.value = '';
 }
+
+// Theme Management
+function applyTheme(isLight) {
+  document.body.classList.toggle('light-mode', isLight);
+  document.getElementById('themeToggle').checked = isLight;
+  localStorage.setItem('notenrechner-theme', isLight ? 'light' : 'dark');
+}
+
+// Auto-detection + Switch
+function initTheme() {
+  const saved = localStorage.getItem('notenrechner-theme');
+  if (saved) {
+    applyTheme(saved === 'light');
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    applyTheme(true);
+  }
+
+  document.getElementById('themeToggle').addEventListener('change', (e) => {
+    applyTheme(e.target.checked);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initTheme);

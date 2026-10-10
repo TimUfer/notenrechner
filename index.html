@@ -11,6 +11,14 @@
   <h1>📊 Notenrechner</h1>
   <p class="subtitle">Module mit Note, CP und optional halber Gewichtung eingeben</p>
 
+  <div class="theme-switch" style="text-align:right; margin-bottom:8px;">
+    <label class="switch-label">
+      <input type="checkbox" id="themeToggle" />
+      <span class="slider"></span>
+      <span>Light Mode</span>
+    </label>
+  </div>
+
   <form id="moduleForm" class="card">
     <h2>Modul hinzufügen</h2>
     <div class="form-row">
@@ -53,10 +61,8 @@
 
   <div class="card actions">
     <button onclick="downloadJSON()" class="btn-secondary">⬇️ JSON herunterladen</button>
-    <label class="btn-secondary" style="margin:0; display:inline-block;">
-      ⬆️ JSON hochladen
-      <input type="file" id="uploadInput" accept=".json" style="display:none" onchange="uploadJSON(this)" />
-    </label>
+    <button onclick="triggerUpload()" class="btn-secondary">⬆️ JSON hochladen</button>
+    <input type="file" id="uploadInput" accept=".json" style="display:none" onchange="uploadJSON(this)" />
   </div>
 </div>
 
