@@ -1,0 +1,48 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #eaeaea;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+.container { max-width: 720px; width: 100%; }
+h1 { font-size: 2.2rem; margin-bottom: 6px; letter-spacing: -0.02em; }
+.subtitle { color: #aaa; margin-bottom: 28px; font-size: 1rem; }
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(6px);
+}
+.card h2 { font-size: 1.2rem; margin-bottom: 18px; }
+.form-row { margin-bottom: 16px; }
+label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #ccc; }
+input[type="text"], input[type="number"] {
+  width: 100%; padding: 10px 12px; border-radius: 8px;
+  border: 1px solid #444; background: #222; color: #fff; font-size: 1rem;
+}
+input[type="text"]:focus, input[type="number"]:focus {
+  outline: none; border-color: #27ae60; box-shadow: 0 0 0 3px rgba(39,174,96,0.15);
+}
+.checkbox-row { display: flex; align-items: center; gap: 10px; }
+.checkbox-row label { margin: 0; }
+.btn-primary {
+  background: #27ae60; color: #fff; border: none; padding: 12px 24px;
+  border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%;
+}
+.btn-primary:hover { background: #219150; }
+#results.hidden { display: none; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #333; font-size: 0.95rem; }
+th { color: #aaa; font-weight: 600; }
+.average-box {
+  margin-top: 22px; padding: 18px; background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.3); border-radius: 10px; text-align: center;
+}
+.average-box span { display: block; color: #aaa; font-size: 0.9rem; margin-bottom: 4px; }
+.average-box strong { font-size: 2rem; color: #2ecc71; letter-spacing: -0.03em; }

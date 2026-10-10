@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Notenrechner</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+  <h1>📊 Notenrechner</h1>
+  <p class="subtitle">Module mit Note, CP und optional halber Gewichtung eingeben</p>
+
+  <form id="moduleForm" class="card">
+    <h2>Modul hinzufügen</h2>
+    <div class="form-row">
+      <label for="modName">Modulname</label>
+      <input type="text" id="modName" placeholder="z. B. Mathematik I" required />
+    </div>
+    <div class="form-row">
+      <label for="modGrade">Note (1,0 – 5,0)</label>
+      <input type="number" id="modGrade" step="0.1" min="1" max="5" placeholder="2.3" required />
+    </div>
+    <div class="form-row">
+      <label for="modCrp">CP (Credit Points)</label>
+      <input type="number" id="modCrp" step="1" min="1" placeholder="5" required />
+    </div>
+    <div class="form-row checkbox-row">
+      <label for="modHalf">Halbe Gewichtung?</label>
+      <input type="checkbox" id="modHalf" />
+    </div>
+    <button type="submit" class="btn-primary">➕ Modul hinzufügen</button>
+  </form>
+
+  <div id="results" class="card hidden">
+    <h2>Übersicht</h2>
+    <table id="tableModules">
+      <thead>
+        <tr>
+          <th>Modul</th>
+          <th>Note</th>
+          <th>CP</th>
+          <th>Gewichtung</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="average-box">
+      <span>Notendurchschnitt:</span>
+      <strong id="avgDisplay">—</strong>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
