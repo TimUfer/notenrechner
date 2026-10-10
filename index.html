@@ -23,15 +23,15 @@
     <h2>Modul hinzufügen</h2>
     <div class="form-row">
       <label for="modName">Modulname</label>
-      <input type="text" id="modName" placeholder="z. B. Mathematik I" required />
+      <input type="text" id="modName" placeholder="z. B. Mathematik I" required title="Bitte einen Modulnamen eingeben" />
     </div>
     <div class="form-row">
-      <label for="modGrade">Note (1,0 – 5,0)</label>
-      <input type="number" id="modGrade" step="0.1" min="1" max="5" placeholder="2.3" required />
+      <label for="modGrade">Note (1,0 – 4,0)</label>
+      <input type="number" id="modGrade" step="0.1" min="1" max="4" placeholder="2.3" required title="Bitte eine Note zwischen 1,0 und 4,0 eingeben" />
     </div>
     <div class="form-row">
       <label for="modCrp">CP (Credit Points)</label>
-      <input type="number" id="modCrp" step="1" min="1" placeholder="5" required />
+      <input type="number" id="modCrp" step="1" min="1" placeholder="5" required title="Bitte die Credit Points eingeben" />
     </div>
     <div class="form-row checkbox-row">
       <label for="modHalf">Halbe Gewichtung?</label>
