@@ -50,6 +50,14 @@
       <strong id="avgDisplay">—</strong>
     </div>
   </div>
+
+  <div class="card actions">
+    <button onclick="downloadJSON()" class="btn-secondary">⬇️ JSON herunterladen</button>
+    <label class="btn-secondary" style="margin:0; display:inline-block;">
+      ⬆️ JSON hochladen
+      <input type="file" id="uploadInput" accept=".json" style="display:none" onchange="uploadJSON(this)" />
+    </label>
+  </div>
 </div>
 
 <script src="script.js"></script>

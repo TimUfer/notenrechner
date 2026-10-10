@@ -60,3 +60,42 @@ document.getElementById('moduleForm').addEventListener('submit', (e) => {
   document.getElementById('modHalf').checked = false;
   document.getElementById('modName').focus();
 });
+
+function downloadJSON() {
+  const data = JSON.stringify(modules, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'notenrechner.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function uploadJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (!Array.isArray(parsed)) throw new Error('JSON muss ein Array sein');
+      modules.length = 0;
+      for (const item of parsed) {
+        modules.push({
+          name: item.name || '',
+          grade: parseFloat(item.grade),
+          crp: parseInt(item.crp, 10),
+          halfWeight: !!item.halfWeight
+        });
+      }
+      render();
+    } catch (err) {
+      alert('Fehler beim Lesen der Datei: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
