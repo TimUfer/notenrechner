@@ -19,13 +19,23 @@ const modules = [];
 function render() {
   const tbody = document.querySelector('#tableModules tbody');
   tbody.innerHTML = '';
-  for (const m of modules) {
+  for (let i = 0; i < modules.length; i++) {
+    const m = modules[i];
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${escapeHtml(m.name)}</td>
       <td>${m.grade.toFixed(1)}</td>
       <td>${m.crp}</td>
       <td>${m.halfWeight ? '½' : '1'}</td>
+      <td class="actions-cell">
+        <div class="dropdown">
+          <button class="btn-dots" onclick="toggleMenu(this, ${i})">⋯</button>
+          <div class="dropdown-menu" id="menu-${i}" style="display:none;">
+            <button onclick="editModule(${i})">✏️ Bearbeiten</button>
+            <button onclick="deleteModule(${i})">🗑️ Löschen</button>
+          </div>
+        </div>
+      </td>
     `;
     tbody.appendChild(tr);
   }
@@ -78,6 +88,35 @@ function triggerUpload() {
   document.getElementById('uploadInput').click();
 }
 
+function toggleMenu(btn, index) {
+  const menu = document.getElementById('menu-' + index);
+  document.querySelectorAll('.dropdown-menu').forEach(m => {
+    if (m !== menu) m.style.display = 'none';
+  });
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+function deleteModule(index) {
+  if (!confirm('Modul wirklich löschen?')) return;
+  modules.splice(index, 1);
+  render();
+}
+
+function editModule(index) {
+  const row = document.querySelectorAll('#tableModules tbody tr')[index];
+  const cells = row.querySelectorAll('td');
+  const name = modules[index].name;
+  const grade = modules[index].grade;
+  const crp = modules[index].crp;
+  const half = modules[index].halfWeight;
+
+  cells[0].innerHTML = `<input type="text" value="${escapeHtml(name)}" id="edit-name-${index}" />`;
+  cells[1].innerHTML = `<input type="number" step="0.1" min="1" max="5" value="${grade}" id="edit-grade-${index}" />`;
+  cells[2].innerHTML = `<input type="number" step="1" min="1" value="${crp}" id="edit-crp-${index}" />`;
+  cells[3].innerHTML = `<select id="edit-half-${index}"><option value="false" ${half ? '' : 'selected'}>1</option><option value="true" ${half ? 'selected' : ''}>½</option></select>`;
+  cells[4].innerHTML = `<button onclick="saveEdit(${index})" class="btn-secondary" style="padding:4px 6px; font-size:0.75rem; min-width:34px;">💾</button> <button onclick="render()" class="btn-secondary" style="padding:4px 6px; font-size:0.75rem; min-width:34px;">✖</button>`;
+}
+
 function uploadJSON(input) {
   const file = input.files[0];
   if (!file) return;
@@ -102,6 +141,14 @@ function uploadJSON(input) {
   };
   reader.readAsText(file);
   input.value = '';
+}
+
+function saveEdit(index) {
+  modules[index].name = document.getElementById('edit-name-' + index).value.trim();
+  modules[index].grade = parseFloat(document.getElementById('edit-grade-' + index).value);
+  modules[index].crp = parseInt(document.getElementById('edit-crp-' + index).value, 10);
+  modules[index].halfWeight = document.getElementById('edit-half-' + index).value === 'true';
+  render();
 }
 
 // Theme Management
